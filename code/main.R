@@ -406,3 +406,6 @@ names(dfClust) <-  c('cluster','modelname')
 head (dfClust[c('cluster','modelname')],50)
 View(dfClust)
 
+##### what to do next #####
+
+
