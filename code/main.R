@@ -361,17 +361,17 @@ x1 <- x[is.na(x$ImageURL) == F,]
 library(stringdist)
 
 # create a combined string using paste function 
-x$combined <- paste0(as.character(x$DataProvider),
-                     "::", as.character(x$SamplingEquipment)#,
+x1$combined <- paste0(as.character(x1$Vessel),
+                     "::", as.character(x1$VehicleName)#,
                      # " ", as.character(x$ObservationYear)#,
                      # " ", as.character(x$DataProvider)
 )
 
 #check the number of unique
-print(length(unique(x$combined)))
+print(length(unique(x1$combined)))
 
 # create a vector of unique combined strings
-unique <- unique(as.character(x$combined))
+unique <- unique(as.character(x1$combined))
 
 # creating the distance matrix 
 distancemodels <- stringdistmatrix(unique,unique,method = "jw")
@@ -389,7 +389,7 @@ rect.hclust(hc,k=5)
 # get tabular data and view
 dfClust <- data.frame(unique, cutree(hc, k=5))
 names(dfClust) <- c('modelname','cluster')
-#View(dfClust)
+View(dfClust)
 
 # visualize the groupings
 plot(table(dfClust$cluster))
