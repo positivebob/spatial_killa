@@ -406,6 +406,20 @@ names(dfClust) <-  c('cluster','modelname')
 head (dfClust[c('cluster','modelname')],50)
 View(dfClust)
 
-#####  #####
+##### _____ Looking at a bunch of images at once #####
+install.packages("rvest")
+install.packages("imager")
+library(rvest)
+library(imager)
+#Run a search query (returning html content)
+search <- read_html("https://www.google.com/search?site=&tbm=isch&q=parrot")
 
+#Grab all <img> tags, get their "src" attribute, a URL to an image
+urls <- search %>% html_nodes("img") %>% html_attr("src") #Get urls of parrot pictures
+
+class(urls)
+
+
+#Load the first four, return as image list, display
+map_il(urls[1:4],load.image) %>% plot
 
